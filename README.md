@@ -23,17 +23,12 @@ The process to create your own compiled LibreOffice binary archive is:
 
 Following steps are done in the `librelambda/build` directory.
 
-#### Get the LibreOffice code from the LibreOffice project
-
-    wget https://download.documentfoundation.org/libreoffice/src/6.4.7/libreoffice-6.4.7.2.tar.xz
-
-This is the latest version in the 6 family at the time of writing. Amazon 2 image is based on Centos 7,
-which proved challenging enough to make us not even consider trying with LibreOffice 7.
-
-In (unlikely) case that another minor version is requested, `docker build` observes `lo_ver` env var, eg
-    lo_ver=6.4.7.5 docker build ...
-
 #### Compile LibreOffice binaries
+
+LibreOffice 7.3.2.2 is the latest version I can build that will run in a fresh lambda/python:3.12 container without complaining about missing libraries.
+
+If you want to try to build a newer version you will at least need to update LO_VERSION in the Dockerfile, you will also need to replace configure.ac with that file from the libreoffice source archive, replacing the modified sections (search the file for CATALYST CUSTOM).
+
 Build the image and launch a container. Depending on your circumnstances/preferences you may use
 slightly different arguments with `docker` commands:
 
